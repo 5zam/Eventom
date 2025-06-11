@@ -1,8 +1,22 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome to Eventom";
 }
+<div class="text-center mt-5">
+    
+    <div class="mb-4">
+        <div class="hero-icon bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
+            <span class="text-primary" style="font-size: 4rem;">🤝</span>
+        </div>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to <span class="text-primary">Eventom</span></h1>
+    <p class="lead mt-3">Join events, grow your skills, and make an impact through volunteering!</p>
+    <div class="mt-4">
+        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-primary btn-lg me-2">
+            Login
+        </a>
+        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary btn-lg">
+            Register Now
+        </a>
+    </div>
 </div>

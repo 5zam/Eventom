@@ -13,23 +13,32 @@ namespace Eventom
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            //--
+            builder.Services.AddRazorPages();
+            //--
             //----------------
             //dependencias Injections
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
 
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+
+
             //Idntity I add it later
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-           
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+            })
+             .AddEntityFrameworkStores<ApplicationDbContext>()
+             .AddDefaultTokenProviders();
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Identity/Account/Login";
                 options.LogoutPath = "/Identity/Account/Logout";
             });
+
+
             //------------
 
             var app = builder.Build();
@@ -56,7 +65,9 @@ namespace Eventom
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
-
+            //--
+            app.MapRazorPages();
+            //--
             app.Run();
         }
     }
